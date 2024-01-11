@@ -1,6 +1,6 @@
 import io
 import logging
-
+import subprocess
 import aiohttp
 import pyaudio
 from pydub import AudioSegment
@@ -55,8 +55,13 @@ class AudioPlayer:
             raise RuntimeError("Audio stream is not open")
 
     async def play_online_wav(self, wav_url):
-        async with aiohttp.ClientSession() as s:
-            async with s.get(wav_url) as resp:
+                try:
+                    subprocess.run(f'bin\mpv.exe -vo null {wav_url} 1>nul', shell=True)
+                
+                except Exception as e:
+                    logger.error(f"播放音频失败，error: {e}")
+                    return
+                '''
                 if resp.status != 200:
                     logger.error(f"音频下载失败，状态码：{resp.status}")
                     return
@@ -71,6 +76,7 @@ class AudioPlayer:
                 except Exception as e:
                     logger.error(f"播放音频失败，error: {e}")
                     return
+                '''
 
     def close_stream(self):
         if self.stream is not None:

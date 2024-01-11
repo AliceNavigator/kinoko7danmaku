@@ -40,14 +40,14 @@ logger = logging.getLogger("kinoko7danmaku")
 
 # 定义模型，包含默认值
 class ConfigModel(BaseModel):
-    room_id: int = Field(default=213, description="房间号")
+    room_id: int = Field(default=25206807, description="房间号")
     gift_threshold: int = Field(default=5, description="≥这个值（单位：元）才会触发礼物")
-    api_url: str = Field(default="", description="API地址，注意要带最后的 /")
+    api_url: str = Field(default="", description="API地址")
     alias: dict = Field(default={}, description="别名，用于替换一些词语，例如：{'Merlin':'么林'}")
-    normal_danmaku_on: bool = Field(default=True, description="普通弹幕是否触发")
-    guard_on: bool = Field(default=True, description="舰长是否触发")
+    normal_danmaku_on: bool = Field(default=False, description="普通弹幕是否触发")
+    guard_buy_on: bool = Field(default=True, description="舰长是否触发")
     super_chat_on: bool = Field(default=True, description="醒目留言是否触发")
-    voice_name: str = Field(default="C酱", description="模型名")
+    voice_name: str = Field(default="baki", description="模型名")
     voice_channel: int = Field(default=-1, description="声道，默认-1为系统输出，如果有声卡，可以自行修改")
     debug: bool = Field(default=False, description="是否开启调试模式，不开启就行了")
 
